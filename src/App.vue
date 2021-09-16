@@ -1,26 +1,25 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <suspense>
+    <template #default>
+      <HelloWorld :msg="todo?.title" :url="todo?.url" />
+    </template>
+    <template #fallback>
+      <span>Loading ...</span>
+    </template>
+  </suspense>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { ref } from "vue";
+import { $fetch } from "ohmyfetch";
+import HelloWorld from "./components/HelloWorld.vue";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+let todo = ref({});
+todo.value = await $fetch("https://jsonplaceholder.typicode.com/photos/1");
 </script>
-
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
