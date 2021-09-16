@@ -1,4 +1,4 @@
-# ohmyfetch-ad
+# ohmyfetch-adventure
 
 ## Project setup
 ```
